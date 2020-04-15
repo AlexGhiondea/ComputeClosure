@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29926.136
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ComputeClosure", "src\ComputeClosure\ComputeClosure.csproj", "{05DA2C49-C134-4445-AE1F-0604DD6CCB96}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AssemblyInspector", "src\AssemblyInspector\AssemblyInspector.csproj", "{351EDCE4-2449-44C4-A9BF-B4B646BA0276}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{05DA2C49-C134-4445-AE1F-0604DD6CCB96}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{05DA2C49-C134-4445-AE1F-0604DD6CCB96}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{05DA2C49-C134-4445-AE1F-0604DD6CCB96}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{05DA2C49-C134-4445-AE1F-0604DD6CCB96}.Release|Any CPU.Build.0 = Release|Any CPU
+		{351EDCE4-2449-44C4-A9BF-B4B646BA0276}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{351EDCE4-2449-44C4-A9BF-B4B646BA0276}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{351EDCE4-2449-44C4-A9BF-B4B646BA0276}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{351EDCE4-2449-44C4-A9BF-B4B646BA0276}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {21E60B22-D8DA-45AD-870C-B7675C924895}
+	EndGlobalSection
+EndGlobal

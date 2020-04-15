@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Properties\**" />
+    <EmbeddedResource Remove="Properties\**" />
+    <None Remove="Properties\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CommandLine.Net" Version="2.1.2" />
+    <PackageReference Include="OutputColorizer" Version="1.1.0" />
+    <PackageReference Include="System.Reflection.Metadata" Version="1.8.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AssemblyInspector\AssemblyInspector.csproj" />
+  </ItemGroup>
+
+</Project>
