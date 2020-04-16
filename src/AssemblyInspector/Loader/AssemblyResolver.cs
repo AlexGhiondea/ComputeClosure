@@ -15,35 +15,13 @@ namespace AssemblyInspector.Loader
         //TODO: support customizing this
         private string _assemblyExtension = ".dll";
 
-        private Action<AssemblyName, AssemblyName> _assemblyVersionMismatchDelegate = (expectedAssembly, actualAssembly) =>
-        {
-            // we loaded a different assembly than what the reference was saying.
-            string error = $"  [DarkYellow!Warning]: Loaded a different version that expected.\n    expected: [Yellow!{expectedAssembly.FullName}], \n    found  : [Yellow!{actualAssembly.FullName}]";
-            Colorizer.WriteLine(error);
-        };
-        private Action<string, AssemblyName, ResolvedAssemblyResultEnum> _assemblyLoadedDelegate = (sourceAssembly, targetAssembly, loadResult) =>
-        {
-            Colorizer.WriteLine("Reference from [Magenta!{0}] -> [Cyan!{1}]", Path.GetFileNameWithoutExtension(sourceAssembly), targetAssembly);
+        private Action<AssemblyName, AssemblyName> _assemblyVersionMismatchDelegate;
 
-            if (loadResult == ResolvedAssemblyResultEnum.NoMatch)
-            {
-                string error = $"[Red!Error: Missing dependency]: '[Magenta!{ Path.GetFileNameWithoutExtension(sourceAssembly)}]' -> [Cyan!{targetAssembly}]";
-                Colorizer.WriteLine(error);
-            }
-            else if (loadResult == ResolvedAssemblyResultEnum.BestMatch)
-            {
-                Colorizer.WriteLine("  [DarkYellow!Warning]: Using best match version from [Yellow!{0}]", new Uri(targetAssembly.CodeBase).LocalPath);
-            }
-            else
-            {
-                Colorizer.WriteLine("  Using assembly with exact match from [Yellow!{0}]", new Uri(targetAssembly.CodeBase).LocalPath);
-            }
-        };
+        private Action<string, AssemblyName, ResolvedAssemblyResultEnum> _assemblyLoadedDelegate;
 
         public AssemblyResolver(IEnumerable<string> probingPaths)
             : this(probingPaths, null, null)
         {
-
         }
 
         public AssemblyResolver(IEnumerable<string> probingPaths, Action<string, AssemblyName, ResolvedAssemblyResultEnum> assemblyLoadedDelegate, Action<AssemblyName, AssemblyName> assemblyVersionMismatch)
@@ -70,6 +48,9 @@ namespace AssemblyInspector.Loader
                 if (File.Exists(referenceWithPath))
                 {
                     AssemblyName an = AssemblyName.GetAssemblyName(referenceWithPath);
+
+                    // stash the location where the assembly was loaded in the CodeBase property
+                    an.CodeBase = Path.GetFullPath(referenceWithPath);
 
                     // if we found the explicit match, use that.
                     if (AssemblyNameComparer.Singleton.Equals(requestedAssembly, an))
@@ -106,7 +87,7 @@ namespace AssemblyInspector.Loader
 
                 visitedAssembliesWithVersion.Add(curAssembly);
 
-                GetReferencesFromFile(newAssemblies, visitedAssembliesWithVersion, new Uri(curAssembly.CodeBase).LocalPath);
+                GetReferencesFromFile(newAssemblies, visitedAssembliesWithVersion, curAssembly.CodeBase);
             }
 
             return visitedAssembliesWithVersion.ToList();

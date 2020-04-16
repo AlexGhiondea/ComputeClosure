@@ -32,18 +32,18 @@ namespace ComputeClosure
             }
             else if (loadResult == ResolvedAssemblyResultEnum.BestMatch)
             {
-                Colorizer.WriteLine("  [DarkYellow!Warning]: Using best match version from [Yellow!{0}]", new Uri(targetAssembly.CodeBase).LocalPath);
+                Colorizer.WriteLine("  [DarkYellow!Warning]: Using best match version from [Yellow!{0}]", targetAssembly.CodeBase);
             }
             else
             {
-                Colorizer.WriteLine("  Using assembly with exact match from [Yellow!{0}]", new Uri(targetAssembly.CodeBase).LocalPath);
+                Colorizer.WriteLine("  Using assembly with exact match from [Yellow!{0}]", targetAssembly.CodeBase);
             }
         };
 
         private static Action<AssemblyName, AssemblyName> _AssemblyLoadedVersionMismatch = (expectedAssembly, actualAssembly) =>
         {
             // we loaded a different assembly than what the reference was saying.
-            string error = $"  [DarkYellow!Warning]: Loaded a different version that expected.\n    expected: [Yellow!{expectedAssembly.FullName}], \n    found  : [Yellow!{actualAssembly.FullName}]";
+            string error = $"  [DarkYellow!Warning]: Loaded a different version that expected.\n    Expected: [Yellow!{expectedAssembly.FullName}], \n    Found  : [Yellow!{actualAssembly.FullName}]";
             errors.Add(error);
             Colorizer.WriteLine(error);
         };
